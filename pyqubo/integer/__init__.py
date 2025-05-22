@@ -17,3 +17,4 @@ from pyqubo.integer.order_enc_integer import *
 from pyqubo.integer.one_hot_enc_integer import *
 from pyqubo.integer.unary_encoded_integer import *
 from pyqubo.integer.log_encoded_integer import *
+from pyqubo.integer.gray_encoded_integer import *
