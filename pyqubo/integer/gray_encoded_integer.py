@@ -8,7 +8,6 @@ class GrayEncInteger(Integer):
     """
     
     def __init__(self, label, value_range):
-        print("GrayEncInteger is deprecated. Use Integer instead.")
         lower, upper = value_range
 
         if not isinstance(lower, int) or not isinstance(upper, int):
