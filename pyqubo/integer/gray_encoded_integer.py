@@ -3,11 +3,12 @@ from pyqubo.integer.integer import Integer, IntegerWithPenalty
 from pyqubo.array import Array
 from cpp_pyqubo import SubH
 
-class GrayEncInteger(IntegerWithPenalty):
+class GrayEncInteger(Integer):
     """Gray encoded integer
     """
     
     def __init__(self, label, value_range):
+        print("GrayEncInteger is deprecated. Use Integer instead.")
         lower, upper = value_range
 
         if not isinstance(lower, int) or not isinstance(upper, int):
@@ -35,7 +36,7 @@ class GrayEncInteger(IntegerWithPenalty):
             # XOR(A,B) = A + B - 2*A*B
             for i in range(num_bits - 2, -1, -1):
                 g_i = self.gray_array[i]
-                b_i_plus_1 = self.gray_array[i + 1]
+                b_i_plus_1 = b_exprs[i + 1]
                 b_exprs[i] = g_i + b_i_plus_1 - 2 * g_i * b_i_plus_1
 
             # Convert to binary code
@@ -45,7 +46,7 @@ class GrayEncInteger(IntegerWithPenalty):
             numeric_expression = lower + sum_of_powers_of_2
 
         final_expression = SubH(numeric_expression, label)
-        
+
         super().__init__(
             label=label,
             value_range=value_range,
