@@ -44,11 +44,8 @@ class GrayEncInteger(IntegerWithPenalty):
             )
             numeric_expression = lower + sum_of_powers_of_2
 
-        final_expression = SubH(
-            label=label,
-            expression=numeric_expression,
-            variables=self.gray_array,
-        )
+        final_expression = SubH(numeric_expression, label)
+        
         super().__init__(
             label=label,
             value_range=value_range,
