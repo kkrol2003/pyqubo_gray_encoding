@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import unittest
-from pyqubo import OneHotEncInteger, OrderEncInteger, Placeholder, LogEncInteger, UnaryEncInteger
+from pyqubo import OneHotEncInteger, OrderEncInteger, Placeholder, LogEncInteger, UnaryEncInteger, GrayEncInteger
 import dimod
 from pyqubo import assert_qubo_equal
 
@@ -161,6 +161,10 @@ class TestInteger(unittest.TestCase):
         #      ('b[1]', 'b[1]'): -7.0,
         #      ('b[2]', 'b[2]'): -7.0}
         # assert_qubo_equal(q, expected_q)
+
+### My changes to the original code start here ###
+
+
     
 
 if __name__ == '__main__':
