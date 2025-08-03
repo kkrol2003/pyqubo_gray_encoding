@@ -3,18 +3,18 @@ from pyqubo.integer.integer import Integer, IntegerWithPenalty
 from pyqubo.array import Array
 from cpp_pyqubo import SubH
 
+
 class GrayEncInteger(Integer):
-    """Gray encoded integer
-    """
-    
+    """Gray encoded integer"""
+
     def __init__(self, label, value_range):
         lower, upper = value_range
 
         if not isinstance(lower, int) or not isinstance(upper, int):
             raise TypeError("lower and upper must be integers")
         if upper <= lower:
-            raise ValueError("upper must be greater than lower")    
-       
+            raise ValueError("upper must be greater than lower")
+
         self.lower_bound = lower
         self.upper_bound = upper
 
@@ -26,7 +26,9 @@ class GrayEncInteger(Integer):
             self.gray_array = []
         else:
             num_bits = max_val_to_encode.bit_length()
-            self.gray_array = Array.create(label + "_gray", shape=num_bits, vartype='BINARY')
+            self.gray_array = Array.create(
+                label + "_gray", shape=num_bits, vartype="BINARY"
+            )
             # Convert to gray code
             b_exprs = [None] * num_bits
             b_exprs[num_bits - 1] = self.gray_array[num_bits - 1]
@@ -39,9 +41,7 @@ class GrayEncInteger(Integer):
                 b_exprs[i] = g_i + b_i_plus_1 - 2 * g_i * b_i_plus_1
 
             # Convert to binary code
-            sum_of_powers_of_2 = sum(
-                [2 ** i * b_exprs[i] for i in range(num_bits)]
-            )
+            sum_of_powers_of_2 = sum([2**i * b_exprs[i] for i in range(num_bits)])
             numeric_expression = lower + sum_of_powers_of_2
 
         final_expression = SubH(numeric_expression, label)
@@ -51,9 +51,3 @@ class GrayEncInteger(Integer):
             value_range=value_range,
             express=final_expression,
         )
-
-        
-      
-
-       
-           
